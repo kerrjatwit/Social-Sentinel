@@ -9,7 +9,7 @@ const targetsRoutes = express.Router();
 const dbo = require("../db/conn");
 
 //  get a list of all targets.
-targetsRoutes.route("/target").get(function (req, res) {
+targetsRoutes.route("/targets").get(function (req, res) {
   let db_connect = dbo.getDb("social_sentinels");
   db_connect
     .collection("targets")
@@ -26,10 +26,7 @@ targetsRoutes.route("/target").get(function (req, res) {
 targetsRoutes.route("/targets/add").post(function (req, res) {
   let db_connect = dbo.getDb("social_sentinels");
   let myobj = {
-    video: req.body.video,
-    timestamp: req.body.timestamp,
-    tag: req.body.tag,
-    created_at: Date()
+    author: req.body
   };
   db_connect.collection("targets").insertOne(myobj, function (err, res) {
     if (err) throw err;
